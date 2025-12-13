@@ -5,38 +5,160 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Still Water Grants</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { margin-bottom: 5px; }
-    .meta { color: #555; margin-bottom: 20px; }
-    .section { margin-top: 28px; }
+    body { font-family: Arial, sans-serif; margin: 18px; }
+    h1 { margin: 0 0 10px 0; font-size: 40px; }
+    .meta { display:flex; flex-wrap:wrap; gap:10px; margin: 10px 0 18px; }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#eee; font-size:13px; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; margin: 10px 0 16px; }
+    input, select { padding:10px; font-size:14px; }
     table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; vertical-align: top; }
-    th { background: #f4f4f4; text-align: left; }
+    th, td { border: 1px solid #ddd; padding: 10px; font-size: 14px; vertical-align: top; }
+    th { background: #f4f4f4; text-align: left; position: sticky; top: 0; z-index: 1; }
+    tr:hover { background: #fafafa; }
     a { text-decoration: none; }
-    .pill { display:inline-block; padding:4px 8px; border-radius: 999px; background:#eee; font-size:12px; }
+    .tag { display:inline-block; padding:2px 8px; border-radius:999px; background:#eee; font-size:12px; }
+    .yes { background:#d9f8d9; }
+    .maybe { background:#fff2c6; }
+    .no { background:#ffd6d6; }
+    .small { color:#666; font-size:12px; }
+    .countbar { margin: 10px 0 14px; font-weight:bold; }
   </style>
 </head>
 <body>
   <h1>Still Water Grants</h1>
+
   <div class="meta">
-    <span class="pill">Last run: 2025-12-12 23:03:15</span>
-    <span class="pill">Keyword: agriculture</span>
+    <span class="pill">Last run (UTC): 2025-12-13T00:12:08.210743+00:00</span>
+    <span class="pill">Keywords: 62</span>
+    <span class="pill">Unique found (this run): 1318</span>
+    <span class="pill">Checked stored: 27</span>
     <span class="pill">AI: ON</span>
   </div>
 
-  <div class="section">
-    <h2>YES</h2>
-    <p>None</p>
+  <div class="controls">
+    <input id="q" placeholder="Search title/agency/reason..." style="min-width:260px; flex:1;" />
+    <select id="decision">
+      <option value="ALL">Decision: ALL</option>
+      <option value="YES">Decision: YES</option>
+      <option value="MAYBE">Decision: MAYBE</option>
+      <option value="NO">Decision: NO</option>
+    </select>
+    <select id="status">
+      <option value="ALL">Status: ALL</option>
+      <option value="posted">Status: posted</option>
+      <option value="forecasted">Status: forecasted</option>
+    </select>
+    <select id="sort">
+      <option value="deadline_asc">Sort: Deadline (soonest)</option>
+      <option value="deadline_desc">Sort: Deadline (latest)</option>
+      <option value="first_seen_desc">Sort: First seen (newest)</option>
+      <option value="decision">Sort: Decision (YES→MAYBE→NO)</option>
+      <option value="title">Sort: Title (A→Z)</option>
+    </select>
   </div>
 
-  <div class="section">
-    <h2>MAYBE</h2>
-    <p>None</p>
-  </div>
+  <div class="countbar" id="counts"></div>
 
-  <div class="section">
-    <h2>NO (for review)</h2>
-    <p>None</p>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Decision</th>
+        <th>Title</th>
+        <th>Agency</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>Reason</th>
+        <th>First seen</th>
+        <th>Last seen</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+<script>
+const DATA = [{"id": "113293", "title": "Data Management", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "No details on eligibility or focus provided; data management could be relevant if it supports business operations or efficiency, but unclear without more info.", "link": "https://www.grants.gov/search-results-detail/113293", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306170", "title": "Engineering Design and Systems Engineering", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "No agency or detailed eligibility information provided; engineering design and systems engineering could relate to greenhouse operations but unclear if grant supports for-profit agricultural businesses.", "link": "https://www.grants.gov/search-results-detail/306170", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306169", "title": "Engineering for Civil Infrastructure", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "The grant focuses on engineering for civil infrastructure, which may relate to greenhouse facility improvements or land development; eligibility for for-profit businesses is uncertain without more details.", "link": "https://www.grants.gov/search-results-detail/306169", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "275109", "title": "National Facilities", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "Insufficient information about the National Facilities grant's purpose and eligibility to determine applicability to a for-profit commercial greenhouse.", "link": "https://www.grants.gov/search-results-detail/275109", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306167", "title": "Operations Engineering", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "Insufficient information provided about the grant's focus or eligibility to determine fit for a for-profit commercial greenhouse nursery.", "link": "https://www.grants.gov/search-results-detail/306167", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "280970", "title": "RFI - DOE Infrastructure Work Scope Development", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "Lack of specific information about the grant focus and eligibility makes it unclear if a for-profit commercial greenhouse/nursery would qualify or benefit.", "link": "https://www.grants.gov/search-results-detail/280970", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "280932", "title": "RFI - DOE R", "agency": "", "status": "posted", "deadline": "", "decision": "MAYBE", "reason": "Insufficient information on grant details and eligibility; unclear if relevant to for-profit commercial greenhouse needs.", "link": "https://www.grants.gov/search-results-detail/280932", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306824", "title": "Advanced Manufacturing", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focus on advanced manufacturing with no clear connection to agriculture, greenhouse, or for-profit horticulture activities.", "link": "https://www.grants.gov/search-results-detail/306824", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "286437", "title": "Air Force Defense Research Sciences Conference and Workshop Support", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Hard NO: matched 'air force'.", "link": "https://www.grants.gov/search-results-detail/286437", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "294523", "title": "Alaska Sea Grant State Fellowship Program", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Hard NO: matched 'fellowship'.", "link": "https://www.grants.gov/search-results-detail/294523", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306171", "title": "Biomechanics and Mechanobiology", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focus on biomechanics and mechanobiology is unrelated to commercial greenhouse/nursery agriculture or relevant business priorities.", "link": "https://www.grants.gov/search-results-detail/306171", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "103313", "title": "Climate Program Office for FY 2012", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "The grant is from FY 2012 and likely outdated; no clear relevance or eligibility for for-profit commercial greenhouse business.", "link": "https://www.grants.gov/search-results-detail/103313", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "278692", "title": "Developing Methodologies for Coastal Impacts Associated with Climate Variability", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant is focused on coastal climate impacts, irrelevant to inland commercial greenhouse nursery in Texas.", "link": "https://www.grants.gov/search-results-detail/278692", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "300997", "title": "EONS 2018: Appendix E Minority University Research and Education Project (MUREP) for Sustainability and Innovation Collaborative &ndash; (MUSIC)", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Program targets minority university research and education projects, likely university-only and education-focused with no clear for-profit eligibility.", "link": "https://www.grants.gov/search-results-detail/300997", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "289185", "title": "Enhancing Interpretation at Ford's Theatre", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focused on cultural/historical site interpretation with no relevance to commercial greenhouse or agriculture business.", "link": "https://www.grants.gov/search-results-detail/289185", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "295449", "title": "Marine Geology and Geophysics", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focus on marine geology/geophysics unrelated to greenhouse/nursery business or agricultural facilities.", "link": "https://www.grants.gov/search-results-detail/295449", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "306172", "title": "Mechanics of Materials and Structures", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant title and synopsis unrelated to agriculture, greenhouse, or business operations; likely academic or engineering research focused without applicability to for-profit horticulture business.", "link": "https://www.grants.gov/search-results-detail/306172", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "107113", "title": "NSF-NIST Interaction in Basic and Applied Scientific Research in BIO, ENG &amp; MPS", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focuses on basic and applied scientific research in BIO, ENG & MPS, likely targeting academic or research institutions rather than for-profit commercial greenhouses.", "link": "https://www.grants.gov/search-results-detail/107113", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "286104", "title": "National Capital Parks- East Shaw Neighborhood Research Interns", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant is focused on neighborhood research interns, likely educational or nonprofit-oriented, with no relevance to commercial greenhouse operations or for-profit agriculture business.", "link": "https://www.grants.gov/search-results-detail/286104", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "254073", "title": "Ocean Drilling Program", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant titled 'Ocean Drilling Program' is unrelated to greenhouse/nursery agriculture or business focus.", "link": "https://www.grants.gov/search-results-detail/254073", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "286105", "title": "R Package Development and Data Certification for the National Park Service Units of the National Capital Region and the Northeast", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "Grant focuses on software development and data certification for National Park Service units, unrelated to commercial greenhouse or horticulture business needs.", "link": "https://www.grants.gov/search-results-detail/286105", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "286103", "title": "Regional Resource Condition Assessment", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "No agency or grant details provided; likely not directly applicable to a for-profit commercial greenhouse/nursery without further info.", "link": "https://www.grants.gov/search-results-detail/286103", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "112354", "title": "Science of Organizations", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "No information provided; title suggests organizational science, unlikely relevant to for-profit greenhouse/nursery business needs.", "link": "https://www.grants.gov/search-results-detail/112354", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "303754", "title": "U.S. Embassy Jakarta PAS Small Grants Competition 2018", "agency": "", "status": "forecasted", "deadline": "", "decision": "NO", "reason": "Grant is for U.S. Embassy Jakarta, likely for Indonesia-based or nonprofit projects, not relevant to a Texas for-profit greenhouse business.", "link": "https://www.grants.gov/search-results-detail/303754", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "290351", "title": "U.S. Mission Australia Annual Program Statement", "agency": "", "status": "posted", "deadline": "", "decision": "NO", "reason": "U.S. Mission Australia grants typically target international diplomacy, cultural exchange, or foreign assistance, not U.S. commercial agriculture or greenhouse businesses.", "link": "https://www.grants.gov/search-results-detail/290351", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "243973", "title": "Center of Excellence for Alternative Jet Fuels and Environment", "agency": "", "status": "posted", "deadline": "09/30/2026", "decision": "NO", "reason": "Grant focuses on alternative jet fuels and environment, unrelated to commercial greenhouse/nursery agriculture or related business needs.", "link": "https://www.grants.gov/search-results-detail/243973", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}, {"id": "279638", "title": "Renewable Energy Systems and Energy Efficiency Improvements Program", "agency": "", "status": "posted", "deadline": "", "decision": "YES", "reason": "Program supports renewable energy and energy efficiency improvements applicable to commercial greenhouses, including for-profit operations like this nursery.", "link": "https://www.grants.gov/search-results-detail/279638", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-13T00:12:08.210743+00:00"}];
+
+function decisionRank(d) {
+  if (d === "YES") return 0;
+  if (d === "MAYBE") return 1;
+  return 2;
+}
+function parseDeadline(s) {
+  if (!s) return 0;
+  const t = Date.parse(s);
+  return isNaN(t) ? 0 : t;
+}
+function textMatch(item, q) {
+  if (!q) return true;
+  const hay = ((item.title||"") + " " + (item.agency||"") + " " + (item.reason||"")).toLowerCase();
+  return hay.indexOf(q.toLowerCase()) !== -1;
+}
+function render() {
+  const q = document.getElementById("q").value.trim();
+  const decision = document.getElementById("decision").value;
+  const status = document.getElementById("status").value;
+  const sort = document.getElementById("sort").value;
+
+  let filtered = DATA.filter(x => textMatch(x, q));
+
+  if (decision !== "ALL") filtered = filtered.filter(x => (x.decision||"") === decision);
+  if (status !== "ALL") filtered = filtered.filter(x => (String(x.status||"").toLowerCase() === status));
+
+  if (sort === "deadline_asc") filtered.sort((a,b) => parseDeadline(a.deadline) - parseDeadline(b.deadline));
+  else if (sort === "deadline_desc") filtered.sort((a,b) => parseDeadline(b.deadline) - parseDeadline(a.deadline));
+  else if (sort === "first_seen_desc") filtered.sort((a,b) => String(b.first_seen||"").localeCompare(String(a.first_seen||"")));
+  else if (sort === "decision") filtered.sort((a,b) => decisionRank(a.decision) - decisionRank(b.decision));
+  else if (sort === "title") filtered.sort((a,b) => String(a.title||"").localeCompare(String(b.title||"")));
+
+  let yes=0, maybe=0, no=0;
+  filtered.forEach(x => { if (x.decision==="YES") yes++; else if (x.decision==="MAYBE") maybe++; else no++; });
+
+  document.getElementById("counts").textContent =
+    "Showing " + filtered.length + " | YES: " + yes + " | MAYBE: " + maybe + " | NO: " + no;
+
+  const tbody = document.getElementById("rows");
+  tbody.innerHTML = "";
+
+  filtered.forEach(x => {
+    const tr = document.createElement("tr");
+
+    const badge = document.createElement("span");
+    badge.className = "tag " + (x.decision==="YES" ? "yes" : (x.decision==="MAYBE" ? "maybe" : "no"));
+    badge.textContent = x.decision || "NO";
+
+    const td0 = document.createElement("td");
+    td0.appendChild(badge);
+    tr.appendChild(td0);
+
+    const td1 = document.createElement("td");
+    const a = document.createElement("a");
+    a.href = x.link || "#";
+    a.target = "_blank";
+    a.textContent = x.title || "(Untitled)";
+    td1.appendChild(a);
+    const small = document.createElement("div");
+    small.className = "small";
+    small.textContent = x.id || "";
+    td1.appendChild(small);
+    tr.appendChild(td1);
+
+    const td2 = document.createElement("td"); td2.textContent = x.agency || ""; tr.appendChild(td2);
+    const td3 = document.createElement("td"); td3.textContent = x.status || ""; tr.appendChild(td3);
+    const td4 = document.createElement("td"); td4.textContent = x.deadline || ""; tr.appendChild(td4);
+    const td5 = document.createElement("td"); td5.textContent = x.reason || ""; tr.appendChild(td5);
+    const td6 = document.createElement("td"); td6.textContent = x.first_seen || ""; tr.appendChild(td6);
+    const td7 = document.createElement("td"); td7.textContent = x.last_seen || ""; tr.appendChild(td7);
+
+    tbody.appendChild(tr);
+  });
+}
+
+["q","decision","status","sort"].forEach(id => {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
+render();
+</script>
+
 </body>
 </html>
