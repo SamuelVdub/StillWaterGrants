@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>50–100 (Best matches)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 18px; }
+    h1 { margin: 0 0 6px 0; font-size: 34px; }
+    .meta { color:#666; margin-bottom: 14px; }
+    .nav a { margin-right: 10px; text-decoration:none; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; margin: 10px 0 16px; }
+    input, select { padding:10px; font-size:14px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 10px; font-size: 14px; vertical-align: top; }
+    th { background: #f4f4f4; text-align: left; position: sticky; top: 0; z-index: 1; }
+    tr:hover { background: #fafafa; }
+    a { text-decoration: none; }
+    .small { color:#666; font-size:12px; }
+    .countbar { margin: 10px 0 14px; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="high_50_100.html">50–100</a>
+    <a href="mid_20_50.html">20–50</a>
+    <a href="low_0_20.html">0–20</a>
+  </div>
+
+  <h1>50–100 (Best matches)</h1>
+  <div class="meta">Last build (UTC): 2025-12-16T20:28:41.696777+00:00 | Records: 20</div>
+
+  <div class="controls">
+    <input id="q" placeholder="Search title/agency/reason/source..." style="min-width:260px; flex:1;" />
+    <select id="sort">
+      <option value="score_desc">Sort: Score (high→low)</option>
+      <option value="deadline_asc">Sort: Deadline (soonest)</option>
+      <option value="newest">Sort: First seen (newest)</option>
+      <option value="source">Sort: Source</option>
+      <option value="title">Sort: Title (A→Z)</option>
+    </select>
+  </div>
+
+  <div class="countbar" id="counts"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Title</th>
+        <th>Agency</th>
+        <th>Source</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>Reason</th>
+        <th>First seen</th>
+        <th>Last seen</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+<script>
+const DATA = [{"id": "grants.gov:279638", "title": "Renewable Energy Systems and Energy Efficiency Improvements Program", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "", "score": 80, "reason": "Program supports renewable energy and energy efficiency improvements, which align well with the greenhouse's potential energy systems upgrades and sustainability goals; for-profit commercial agriculture applicants are typically eligible under USDA programs, though specific eligibility should be confirmed. Deadline/status unclear, which tempers confidence slightly.", "bullets": "Focus on renewable energy systems and energy efficiency fits greenhouse energy upgrades (solar, HVAC, lighting). | For-profit agricultural businesses often eligible for USDA Rural Energy for America Program (REAP), which this likely represents. | No clear deadline or application status provided, reducing immediate applicability certainty. | Supports cost-share and grants, matching the funding focus for infrastructure and equipment. | Must verify explicitly that commercial, for-profit greenhouses/nursery operations in Texas are eligible.", "link": "https://www.grants.gov/search-results-detail/279638", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "grants.gov:310029", "title": "Renewable Energy Systems and Energy Efficiency Improvements Program", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "", "score": 80, "reason": "The Renewable Energy Systems and Energy Efficiency Improvements Program supports energy efficiency and renewable energy projects and is generally available to agricultural producers and rural small businesses, which potentially includes for-profit commercial greenhouses in Texas. However, the lack of a clearly stated deadline and detailed eligibility for commercial greenhouse operations slightly lowers the confidence.", "bullets": "Program supports renewable energy systems and energy efficiency improvements relevant to greenhouse energy needs (heating, lighting, HVAC, solar). | Eligible entities include agricultural producers and rural small businesses, likely covering a family-owned commercial greenhouse nursery. | For-profit entities are eligible, aligning with business profile requirements. | No explicit deadline listed; status unclear, which may affect planning and application timing. | Must verify specific eligibility and local applicability to confirm fit, but broadly well-aligned.", "link": "https://www.grants.gov/search-results-detail/310029", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "360059", "title": "Small Surface Water and Groundwater Storage Projects (Small Storage Program)", "agency": "", "source": "", "status": "posted", "deadline": "04/17/2026", "score": 75, "reason": "Program supports water storage projects which align well with agricultural water management needs for commercial greenhouse/nursery operations in Texas; eligible to for-profits, with a focus on surface and groundwater storage.", "bullets": "Supports small surface water and groundwater storage projects, relevant to irrigation and water conservation in agriculture. | Commercial agricultural operations, including for-profit growers, are typically eligible for this NRCS program. | Focus on infrastructure improvements aligns with business interests in improving water systems and conservation. | Deadline is valid and allows sufficient planning (due 04/17/2026). | No specific exclusions against for-profit businesses; not limited to military, students, universities, or nonprofits only.", "link": "https://www.grants.gov/search-results-detail/360059", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "grants.gov:360059", "title": "Small Surface Water and Groundwater Storage Projects (Small Storage Program)", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "04/17/2026", "score": 75, "reason": "The program supports water storage projects that could benefit agricultural operations like commercial greenhouses and nurseries in Texas. As a for-profit agricultural operation, the business is likely eligible if the project aligns with surface water or groundwater storage improvements. The opportunity may fund infrastructure that supports irrigation and water conservation, which is relevant. However, specifics on for-profit eligibility and applicable project types should be verified.", "bullets": "Supports small surface water and groundwater storage projects relevant to agricultural water management. | Potential to fund infrastructure improvements benefiting irrigation/water systems for commercial nurseries. | Business fits agricultural production criteria and location in Texas is eligible. | For-profit eligibility generally allowed, but nonprofit/tribal applicants common; confirm acceptance of family-owned commercial entities. | Deadline is clear (04/17/2026), reducing risk of uncertainty.", "link": "https://www.grants.gov/search-results-detail/360059", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "359266", "title": "Annual Program Statement (APS)", "agency": "", "source": "", "status": "forecasted", "deadline": "", "score": 70, "reason": "Potentially applicable since it is an Annual Program Statement possibly supporting agriculture-related projects, but the lack of detailed eligibility and deadlines limits confidence.", "bullets": "APS format often allows for varied project submissions including for-profit entities with viable proposals. | Focus area likely includes agriculture/horticulture/CEA but exact inclusion of commercial greenhouses or nurseries is not confirmed. | Potential for funding in energy efficiency, water systems, and infrastructure aligns with business focus. | No clear deadline stated, reducing certainty on application timing and current availability. | Eligibility and restrictions not specified; need to confirm for-profit entity participation and Texas location eligibility.", "link": "https://www.grants.gov/search-results-detail/359266", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-15T19:43:39.105506+00:00"}, {"id": "348809", "title": "Calendar Year 2022 Disaster Water Grants", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 65, "reason": "Potential fit for Texas-based commercial greenhouse with water focus, but lack of detailed info on eligibility and scope reduces confidence.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/348809", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "352845", "title": "F24AS00298 Cooperative Agriculture", "agency": "", "source": "", "status": "posted", "deadline": "03/07/2029", "score": 65, "reason": "Agency and synopsis missing, but title suggests applicable cooperative agriculture funding which often includes cost-share and capital support usable by for-profit agriculture businesses in Texas with infrastructure and energy focus.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/352845", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "356623", "title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY", "agency": "", "source": "", "status": "posted", "deadline": "09/29/2029", "score": 65, "reason": "Funding targets advanced energy technologies with potential applicability to energy systems in commercial greenhouses; open to for-profits; energy efficiency/renewables focus aligns with business priorities, but primary emphasis is on energy tech scaleup rather than direct agriculture or horticulture infrastructure.", "bullets": "Open to for-profit entities, no nonprofit-only exclusion noted | Focus on energy technology advancements relevant to renewables, efficiency, heating, lighting, HVAC\u2014key areas for greenhouse operations | Potential opportunity to leverage cost-share/incentives for energy system upgrades or innovative tech adoption | No geographic restriction; business located in Texas fits eligibility | Deadline is 09/29/2029, clearly stated, allowing ample preparation time", "link": "https://www.grants.gov/search-results-detail/356623", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "347328", "title": "Environmental Sustainability", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 60, "reason": "Eligibility and Texas fit unclear due to missing agency and detailed synopsis; theme aligns with sustainability relevant to greenhouse operations and infrastructure; potential fit pending further details on eligibility and funding scope.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/347328", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "grants.gov:347328", "title": "Environmental Sustainability", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "", "score": 60, "reason": "Potentially relevant for agricultural sustainability projects, including energy efficiency and water conservation in greenhouses; however, lack of detailed eligibility and agency info, and unclear deadline reduce confidence.", "bullets": "May fund environmental sustainability initiatives applicable to controlled environment agriculture (CEA). | Supports energy efficiency, water/irrigation conservation, and infrastructure\u2014key areas for commercial greenhouses. | For-profit eligibility is not explicitly stated, requiring further verification. | Deadline and agency details are missing, lowering certainty of opportunity availability. | No indication of military, student, or nonprofit-only restrictions, so for-profit businesses could be eligible.", "link": "https://www.grants.gov/search-results-detail/347328", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "grants.gov:346815", "title": "FY 2025 EDA Public Works and Economic Adjustment Assistance Programs", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "", "score": 60, "reason": "For-profit businesses may be eligible for infrastructure and facility improvements under the EDA Public Works and Economic Adjustment Assistance Programs, which can support projects like greenhouse infrastructure and economic development in the Texas regions specified. However, the program mainly targets economic development projects and community infrastructure, so the fit is moderate, and eligibility details for commercial agriculture businesses should be confirmed. Deadline/status is not specified, which adds some uncertainty.", "bullets": "Program supports public works and economic adjustment projects that can include infrastructure improvements relevant to commercial operations. | For-profit entities can be eligible if aligned with local economic development priorities and partnerships with public entities. | May fund infrastructure improvements applicable to greenhouse facilities, energy systems, water management, and automation. | Primary focus is on economic development/projects benefiting broader community, so project must demonstrate wider economic impact. | Deadline/status is not clearly defined in the listing, which reduces certainty about timing.", "link": "https://www.grants.gov/search-results-detail/346815", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "grants.gov:359984", "title": "Food Safety Capacity and Infrastructure Building (U2F)", "agency": "", "source": "grants.gov", "status": "forecasted", "deadline": "", "score": 60, "reason": "Opportunity focuses on food safety infrastructure which can align with commercial nursery/greenhouse operations; for-profit entities may be eligible, but confirm specific eligibility and funding availability. Deadline/status unclear, reducing score.", "bullets": "Targets food safety capacity and infrastructure building relevant to commercial production facilities. | For-profit commercial agricultural operations are potentially eligible, check for explicit inclusion in detailed guidelines. | No clear deadline or funding status noted, which introduces uncertainty. | Focus on infrastructure aligns with facility upgrades (packing, storage, food safety systems). | Not limited to nonprofit, academic, or DoD entities, so potentially applicable.", "link": "https://www.grants.gov/search-results-detail/359984", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "grants.gov:356623", "title": "SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY", "agency": "", "source": "grants.gov", "status": "posted", "deadline": "09/29/2029", "score": 60, "reason": "Potentially relevant for energy efficiency and renewable energy systems upgrades, but the opportunity is broad and may prioritize technology developers or projects with advanced energy tech rather than commercial agriculture directly.", "bullets": "Focuses on advancing energy technologies with untapped potential, which could align with greenhouse energy efficiency or renewables projects. | No explicit exclusion of for-profit entities; commercial businesses likely eligible if project fits program goals. | Not agriculture-specific, so competitive advantage may be limited versus energy tech developers or research institutions. | Eligible for large-scale infrastructure or energy system upgrades, possibly covering solar, HVAC, or lighting enhancements. | Deadline is 09/29/2029, which is clear and far in the future.", "link": "https://www.grants.gov/search-results-detail/356623", "first_seen": "2025-12-16T20:28:41.696777+00:00", "last_seen": "2025-12-16T20:28:41.696777+00:00"}, {"id": "348870", "title": "Community Facilities Program Disaster Repair Grants", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 55, "reason": "Potential fit for disaster repair funding on facilities and infrastructure in Texas but unclear if for-profits are eligible and whether greenhouses are covered.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/348870", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "347414", "title": "FY 2023 Disaster Supplemental", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 55, "reason": "Insufficient details about eligibility and scope in the provided synopsis; disaster supplemental funding might support agriculture and infrastructure but specifics are unclear.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/347414", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "355705", "title": "FY 2024 &ndash; 2026 - Broad Agency Announcement (BAA)", "agency": "", "source": "", "status": "posted", "deadline": "09/30/2026", "score": 55, "reason": "Insufficient detailed information provided about eligibility and focus of the FY 2024-2026 BAA to confirm fit; potential fit if For-profit eligible and targeting agriculture, energy, or infrastructure related to greenhouse operations.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/355705", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "347329", "title": "Electrochemical Systems", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 50, "reason": "Insufficient information on eligibility and Texas applicability, but potential relevance to energy or infrastructure in greenhouse operations.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/347329", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "348258", "title": "Energy, Power, Control, and Networks", "agency": "", "source": "", "status": "posted", "deadline": "", "score": 50, "reason": "Unclear details on eligibility and sector focus; potential relevance in energy and control systems but insufficient info to confirm strong fit.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/348258", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "356127", "title": "FY 2024 &ndash; 2026 - Broad Agency Announcement (BAA) Announcement Type: Initial", "agency": "", "source": "", "status": "posted", "deadline": "09/30/2026", "score": 50, "reason": "Insufficient information on eligibility, agency, and synopsis makes it unclear if this Broad Agency Announcement is suitable for a for-profit greenhouse business in Texas.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/356127", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}, {"id": "350952", "title": "SPURRING PROJECTS TO ADVANCE ENERGY RESEARCH AND KNOWLEDGE SWIFTLY (SPARKS)", "agency": "", "source": "", "status": "posted", "deadline": "09/30/2029", "score": 50, "reason": "Insufficient information about agency and synopsis to fully determine eligibility and fit; potential relevance to energy research but unclear if for-profit greenhouse/nursery operations at scale are targeted or supported.", "bullets": "", "link": "https://www.grants.gov/search-results-detail/350952", "first_seen": "2025-12-13T00:12:08.210743+00:00", "last_seen": "2025-12-16T16:13:44.555800+00:00"}];
+
+function parseDeadline(s) {
+  if (!s) return 0;
+  const t = Date.parse(s);
+  return isNaN(t) ? 0 : t;
+}
+function textMatch(item, q) {
+  if (!q) return true;
+  const hay = ((item.title||"") + " " + (item.agency||"") + " " + (item.reason||"") + " " + (item.source||"") + " " + (item.bullets||"")).toLowerCase();
+  return hay.indexOf(q.toLowerCase()) !== -1;
+}
+function render() {
+  const q = document.getElementById("q").value.trim();
+  const sort = document.getElementById("sort").value;
+
+  let filtered = DATA.filter(x => textMatch(x, q));
+
+  if (sort === "score_desc") filtered.sort((a,b) => (Number(b.score||0) - Number(a.score||0)));
+  else if (sort === "deadline_asc") filtered.sort((a,b) => parseDeadline(a.deadline) - parseDeadline(b.deadline));
+  else if (sort === "newest") filtered.sort((a,b) => String(b.first_seen||"").localeCompare(String(a.first_seen||"")));
+  else if (sort === "source") filtered.sort((a,b) => String(a.source||"").localeCompare(String(b.source||"")));
+  else if (sort === "title") filtered.sort((a,b) => String(a.title||"").localeCompare(String(b.title||"")));
+
+  document.getElementById("counts").textContent = "Showing " + filtered.length;
+
+  const tbody = document.getElementById("rows");
+  tbody.innerHTML = "";
+
+  filtered.forEach(x => {
+    const tr = document.createElement("tr");
+
+    const td0 = document.createElement("td"); td0.textContent = String(x.score ?? ""); tr.appendChild(td0);
+
+    const td1 = document.createElement("td");
+    const a = document.createElement("a");
+    a.href = x.link || "#";
+    a.target = "_blank";
+    a.textContent = x.title || "(Untitled)";
+    td1.appendChild(a);
+    const small = document.createElement("div");
+    small.className = "small";
+    small.textContent = x.id || "";
+    td1.appendChild(small);
+    tr.appendChild(td1);
+
+    const td2 = document.createElement("td"); td2.textContent = x.agency || ""; tr.appendChild(td2);
+    const td3 = document.createElement("td"); td3.textContent = x.source || ""; tr.appendChild(td3);
+    const td4 = document.createElement("td"); td4.textContent = x.status || ""; tr.appendChild(td4);
+    const td5 = document.createElement("td"); td5.textContent = x.deadline || ""; tr.appendChild(td5);
+
+    const td6 = document.createElement("td");
+    td6.textContent = x.reason || "";
+    if (x.bullets) {
+      const b = document.createElement("div");
+      b.className = "small";
+      b.textContent = x.bullets;
+      td6.appendChild(b);
+    }
+    tr.appendChild(td6);
+
+    const td7 = document.createElement("td"); td7.textContent = x.first_seen || ""; tr.appendChild(td7);
+    const td8 = document.createElement("td"); td8.textContent = x.last_seen || ""; tr.appendChild(td8);
+
+    tbody.appendChild(tr);
+  });
+}
+
+["q","sort"].forEach(id => {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
+render();
+</script>
+</body>
+</html>
